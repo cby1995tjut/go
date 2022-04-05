@@ -32,3 +32,7 @@ func throwsPanic() (b bool) {
 func init() {
 	fmt.Println("Im init")
 }
+
+func init() {
+	fmt.Println("Im init2")
+}
