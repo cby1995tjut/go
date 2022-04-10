@@ -28,8 +28,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 		t, _ := template.ParseFiles("login.gtpl")
 		t.Execute(w, nil)
 	} else {
+		//post method
 		r.ParseForm()
 		// logic part of log in
+		// r.Form is type of map[String][]String
 		fmt.Println("username:", r.Form["username"])
 		fmt.Println("password:", r.Form["password"])
 	}
