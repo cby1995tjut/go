@@ -7,7 +7,8 @@ import (
 	"strings"
 )
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
+//implement HandlerFunc
+func sayHelloName(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	// parse arguments, you have to call this by yourself
 	fmt.Println(r.Form)
@@ -22,7 +23,7 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello astaxie!") // send data to client side
 }
 func main() {
-	http.HandleFunc("/", sayhelloName)       // set router
+	http.HandleFunc("/", sayHelloName)       // set router
 	err := http.ListenAndServe(":9090", nil) // set listen port
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
