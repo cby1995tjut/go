@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strings"
+	strings "strings"
 )
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
@@ -32,8 +32,15 @@ func login(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		// logic part of log in
 		// r.Form is type of map[String][]String
-		fmt.Println("username:", r.Form["username"])
-		fmt.Println("password:", r.Form["password"])
+		//fmt.Println("username:", r.Form["username"])
+		//fmt.Println("password:", r.Form["password"])
+		//cross site
+		fmt.Println("username:", template.HTMLEscapeString(r.Form.Get("username"))) // print at server side
+		fmt.Println("password:", template.HTMLEscapeString(r.Form.Get("password")))
+		template.HTMLEscape(w, []byte(r.Form.Get("username")))
+
+		//t, err := template.New("foo").Parse(`{{define "T"}}Hello, {{.}}!{{end}}`)
+		//err = t.ExecuteTemplate(out, "T", "<script>alert('you have been pwned')</script>")
 	}
 }
 
